@@ -5,8 +5,8 @@ from django.db.models import Count
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator
 
-from yal.comments.models import YALComment as Comment
-from models import Article
+from jmbocomments.models import YALComment as Comment
+from jmboarticles.models import Article
 
 
 def article_list(request, page=1):

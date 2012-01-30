@@ -1,7 +1,7 @@
 import datetime
 from haystack import indexes
 from haystack import site
-from article.models import Article
+from jmboarticles.models import Article
 
 
 class ArticleIndex(indexes.SearchIndex):

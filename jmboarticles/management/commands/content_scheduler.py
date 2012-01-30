@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from yal.article.models import Article
+from jmboarticles.models import Article
 from yal.poll.models import Poll
 from yal.featured.models import Item
 from datetime import datetime

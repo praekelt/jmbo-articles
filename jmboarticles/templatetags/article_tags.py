@@ -3,7 +3,7 @@ from django.template import Library
 register = Library()
 
 
-from article.models import Article
+from jmboarticles.models import Article
 
 # this would work very well as an assignment tag; but it's a Django development
 # version feature. So I'm haxing it for now.

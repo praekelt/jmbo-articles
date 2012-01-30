@@ -3,7 +3,7 @@ from django.test.client import Client
 from django.core.urlresolvers import reverse
 from django.template.defaultfilters import slugify
 from django.contrib.sites.models import Site
-from yal.article.models import Article
+from jmboarticles.models import Article
 from datetime import datetime
 
 

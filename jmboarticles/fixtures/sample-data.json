@@ -1,6 +1,6 @@
 [{
     "pk": 1,
-    "model": "article.article",
+    "model": "jmboarticles.article",
     "fields": {
         "view_count": 108,
         "updated": "2011-11-19 22:53:52",

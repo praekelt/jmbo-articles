@@ -11,8 +11,8 @@ from django.contrib.comments.moderation import moderator
 from django.contrib.contenttypes.models import ContentType
 
 from poll.models import Poll
-from yal.article.managers import PublishedManager
-from yal.comments.models import YALCommentModerator
+from jmboarticles.managers import PublishedManager
+from jmbocomments.models import YALCommentModerator
 
 
 class Article(models.Model, DirtyFieldsMixin):

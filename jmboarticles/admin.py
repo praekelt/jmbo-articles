@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.flatpages.admin import FlatPageAdmin
 from django.contrib.flatpages.models import FlatPage
 
-from yal.article.models import Article
+from jmboarticles.models import Article
 
 from ckeditor.widgets import AdminCKEditor
 
