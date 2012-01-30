@@ -1,0 +1,4 @@
+Django>=1.3
+nose
+-e git+git://github.com/praekelt/jmbo-comments.git@develop#egg=jmbo-comments
+
