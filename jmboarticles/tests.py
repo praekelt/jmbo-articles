@@ -1,3 +1,6 @@
+import os
+os.environ['DJANGO_SETTINGS_MODULE'] = 'jmboarticles.settings'
+
 from django.test import TestCase
 from django.test.client import Client
 from django.core.urlresolvers import reverse

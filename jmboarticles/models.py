@@ -10,7 +10,7 @@ from django.contrib.sites.models import Site
 from django.contrib.comments.moderation import moderator
 from django.contrib.contenttypes.models import ContentType
 
-from poll.models import Poll
+from jmbopolls.models import Poll
 from jmboarticles.managers import PublishedManager
 from jmbocomments.models import YALCommentModerator
 
@@ -36,8 +36,8 @@ class Article(models.Model, DirtyFieldsMixin):
 
     # Extra Content
     poll = models.ForeignKey(Poll, blank=True, null=True)
-    video = models.ForeignKey('video.Video', blank=True, null=True)
-    linked_article = models.ForeignKey('article.Article', blank=True, null=True)
+    video = models.ForeignKey('jmbovideos.Video', blank=True, null=True)
+    linked_article = models.ForeignKey('jmboarticles.Article', blank=True, null=True)
     linked_page = models.ForeignKey('flatpages.FlatPage', blank=True, null=True)
 
     # Meta
