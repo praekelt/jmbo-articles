@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% load article_tags poll_tags featured_tags video_tags %}
+
+{% block content %}
+
+
+{% get_featured_poll "featured_poll" %}
+{% if featured_poll %}
+    <h2 class="black">Poll</h2>
+    {% show_poll featured_poll %}
+{% endif %}
+{# old poll display style #}
+{# {% if featured_poll %} #}
+{#     <h2 class="black"><a href="{% url poll_detail pk=featured_poll.pk %}">{{ featured_poll.question }}</a></h2> #}
+{# {% endif %} #}
+
+
+{% get_featured_items 5 "featured_item_list" %}
+{% if featured_item_list %}
+<h2 class="black">Featured</h2>
+<ul class="list">
+	{% for item in featured_item_list %}
+	<li>
+		<a href="{{ item.link }}">{{ item.title }}</a>
+	</li>
+	{% endfor %}
+</ul>
+{% endif %}
+
+
+<h2><a href="{% url article_list %}">Articles</a></h2>
+{% get_articles 4 "article_list" %}
+<ul class="list">
+   {% for article in article_list %}
+    <li>
+        <a href="{% url article_detail article.pk %}">{{ article.title }}</a> {{ article.description }}
+        <br/>
+        <small>{{ article.updated|date:"D, j M Y, H:i" }}</small>
+    </li>
+    {% endfor %}
+</ul>
+
+{% get_featured_videos 4 "video_list" %}
+{% if video_list.exists %}
+<h2 class="black">Videos</h2>
+<ul class="list">
+    {% for video in video_list %}
+    <li>
+        <a href="{{ video.video.url }}"><img src="{{ video.thumbnail.url }}"></a> <br/>
+        <b>{{video.title}}</b>: {{ video.description }}
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% endblock %}

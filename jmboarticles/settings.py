@@ -109,7 +109,7 @@ ROOT_URLCONF = 'jmboarticles.temp-urls'
 
 
 TEMPLATE_DIRS = (
-    os.path.join(PROJECT_PATH, 'templates', 'xhtml', '0')
+    os.path.join(PROJECT_PATH, 'templates')
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (

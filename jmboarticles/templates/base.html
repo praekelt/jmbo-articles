@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN"
+    "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>Young Africa Live - {{ site.name }} {% block title %}{% endblock %}</title>
+    {% block extrahead %}{% endblock %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}base_0.css?v2" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+</head>
+<body>
+    <div id="header">
+        <img src="{{ STATIC_URL }}gfx/logo_0_{{ site.name }}.gif" alt="YAL" height="43" />
+    </div>
+
+    <div id="nav">
+        <a href="{% url index %}">Home</a> /
+        <a href="{% url article_list %}">Articles</a> /
+
+        <a name="top" id="top"></a>
+    </div>
+
+    <div id="main">
+        {% block content %}{% endblock %}
+    </div>
+
+
+    <form id="search" method="get" action="/search/">
+        <a href="#top">Back to top</a><br />
+
+        <input type="text" class="inp-text" name="q" />
+        <input type="submit" class="inp-submit" value="Search" />
+    </form>
+
+
+    <div id="footer">
+        <a href="/info/hiv-the-facts/">HIV: the facts</a> &middot;
+        <a href="/info/help-at-hand/">Help: at hand</a> &middot;
+        <a href="/about/">About</a> &middot;
+        <a href="/contact/">Contact</a> &middot;
+        <a href="/terms/">Terms</a> <br/>
+        &copy; 2011 Praekelt Foundation.
+    </div>
+</body>
+</html>
