@@ -4,7 +4,6 @@ django-nose
 PIL==1.1.7
 django-category==0.0.3
 -e git+git://github.com/praekelt/jmbo-comments.git@develop#egg=jmbo-comments
--e git+git://github.com/praekelt/jmbo-polls.git@develop#egg=jmbo-polls
 django-dirtyfields
 South==0.7.3
 -e git+https://github.com/dwaiter/django-ckeditor.git#egg=django_ckeditor-dev

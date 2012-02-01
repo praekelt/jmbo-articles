@@ -10,4 +10,5 @@ urlpatterns = patterns('',
 
     url(r'^$', TemplateView.as_view(template_name='index.html'), name='index'),
     url(r'^article/', include('urls')),
+    url(r'^poll/', include('poll.urls')),
    )

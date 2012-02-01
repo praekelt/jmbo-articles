@@ -1,0 +1,42 @@
+[{
+    "pk": 1,
+    "model": "poll.poll",
+    "fields": {
+        "image": "",
+        "question": "Chuck Testa?",
+        "sites": [1],
+        "publish_on": "2011-11-19 21:59:24",
+        "participants": [1],
+        "published": true
+    }
+},
+{
+    "pk": 1,
+    "model": "poll.choice",
+    "fields": {
+        "vote_users": [],
+        "vote_count": 0,
+        "poll": 1,
+        "choice": "Nope!"
+    }
+},
+{
+    "pk": 2,
+    "model": "poll.choice",
+    "fields": {
+        "vote_users": [1],
+        "vote_count": 1,
+        "poll": 1,
+        "choice": "Nope!"
+    }
+},
+{
+    "pk": 3,
+    "model": "poll.choice",
+    "fields": {
+        "vote_users": [],
+        "vote_count": 0,
+        "poll": 1,
+        "choice": "Nope!"
+    }
+}]

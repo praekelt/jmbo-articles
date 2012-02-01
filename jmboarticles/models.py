@@ -10,7 +10,7 @@ from django.contrib.sites.models import Site
 from django.contrib.comments.moderation import moderator
 from django.contrib.contenttypes.models import ContentType
 
-from jmbopolls.models import Poll
+from jmboarticles.poll.models import Poll
 from jmboarticles.video.models import Video
 from jmboarticles.managers import PublishedManager
 from jmbocomments.models import YALCommentModerator
