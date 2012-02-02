@@ -77,15 +77,11 @@ class Article(models.Model, DirtyFieldsMixin):
             'pk': self.pk
         })
 
-def update_published_on_field(sender, **kwargs):
-    instance = kwargs.get('instance')
-    if 'published' in instance.get_dirty_fields():
-        if instance.published:
-            instance.published_on = datetime.now()
-        else:
-            instance.published_on = datetime.min
-    elif instance.published and not instance.published_on:
-        instance.published_on = instance.updated
+def update_published_on_field(sender, instance, **kwargs):
+    if instance.published:
+        instance.published_on = datetime.now()
+    else:
+        instance.published_on = datetime.min
 
 pre_save.connect(update_published_on_field, sender=Article)
 
