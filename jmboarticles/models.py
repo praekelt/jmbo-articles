@@ -83,7 +83,7 @@ def update_published_on_field(sender, **kwargs):
         if instance.published:
             instance.published_on = datetime.now()
         else:
-            instance.published_on = None
+            instance.published_on = datetime.min
     elif instance.published and not instance.published_on:
         instance.published_on = instance.updated
 
