@@ -3,7 +3,7 @@ from django import template
 
 register = template.Library()
 
-from poll.models import Poll, Choice
+from jmboarticles.poll.models import Poll, Choice
 
 
 
