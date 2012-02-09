@@ -4,7 +4,7 @@ from django.template import Library
 register = Library()
 
 
-from featured.models import Item
+from jmboarticles.featured.models import Item
 
 # this would work very well as an assignment tag; but it's a Django development 
 # version feature. So I'm haxing it for now.
