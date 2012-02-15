@@ -1,9 +1,10 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404
+from django.core.urlresolvers import reverse
 from django.views.generic.simple import direct_to_template
 from django.db.models import Count
 from django.contrib.contenttypes.models import ContentType
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from jmbocomments.models import YALComment as Comment
 from jmboarticles.models import Article
@@ -50,7 +51,10 @@ def article_detail(request, pk, page=None):
     return direct_to_template(request, 'article/article_detail.html', {
         'article': article,
         'comment_list': comment_list,
-        'comment_count': comment_count
+        'comment_count': comment_count,
+        'current_url': reverse('article_detail', kwargs={
+            'pk': article.pk,
+        })
     })
 
 
