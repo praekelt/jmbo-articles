@@ -6,7 +6,7 @@ from django.db.models import Count
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from jmbocomments.models import Comment
+from jmbocomments.models import UserComment
 from jmboarticles.models import Article
 
 
@@ -38,7 +38,7 @@ def article_detail(request, pk, page=None):
     article.inc_view_count()
     article_content_type = ContentType.objects.get_for_model(Article)
 
-    comment_qs = Comment.objects.filter(content_type=article_content_type,
+    comment_qs = UserComment.objects.filter(content_type=article_content_type,
         object_pk=article.pk).select_related('user').order_by('submit_date')
     paginator = Paginator(comment_qs, per_page=5, orphans=4)
     if not page:
