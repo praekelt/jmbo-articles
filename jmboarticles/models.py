@@ -13,7 +13,7 @@ from django.contrib.contenttypes.models import ContentType
 from jmboarticles.poll.models import Poll
 from jmboarticles.video.models import Video
 from jmboarticles.managers import PublishedManager
-from jmbocomments.models import YALCommentModerator
+from jmbocomments.models import CommentModerator
 
 
 class Article(models.Model, DirtyFieldsMixin):
@@ -85,7 +85,7 @@ def update_published_on_field(sender, instance, **kwargs):
 
 pre_save.connect(update_published_on_field, sender=Article)
 
-class ArticleCommentModerator(YALCommentModerator):
+class ArticleCommentModerator(CommentModerator):
     email_notification = False
     enable_field = 'comments_enabled'
 

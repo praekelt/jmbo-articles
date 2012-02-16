@@ -6,7 +6,7 @@ from django.db.models import Count
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from jmbocomments.models import YALComment as Comment
+from jmbocomments.models import Comment
 from jmboarticles.models import Article
 
 
