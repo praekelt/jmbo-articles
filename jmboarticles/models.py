@@ -17,7 +17,7 @@ from jmbocomments.models import UserCommentModerator
 
 
 class Article(models.Model, DirtyFieldsMixin):
-    published = models.BooleanField(default=True)
+    published = models.BooleanField(default=False)
     published_on = models.DateTimeField(blank=True, null=True)
     publish_on = models.DateTimeField(blank=True, null=True)
     on_homepage = models.BooleanField('Always display on the homepage?', default=False)
@@ -77,13 +77,6 @@ class Article(models.Model, DirtyFieldsMixin):
             'pk': self.pk
         })
 
-def update_published_on_field(sender, instance, **kwargs):
-    if instance.published:
-        instance.published_on = datetime.now()
-    else:
-        instance.published_on = datetime.min
-
-pre_save.connect(update_published_on_field, sender=Article)
 
 class ArticleCommentModerator(UserCommentModerator):
     email_notification = False

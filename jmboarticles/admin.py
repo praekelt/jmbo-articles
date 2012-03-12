@@ -27,7 +27,7 @@ class ArticleAdmin(admin.ModelAdmin):
     readonly_fields = ('author', 'created', 'updated', 'published_on')
     fieldsets = (
         (None, {
-            'fields': ('title', 'description', 'publish_on', 'published', 'published_on', 'on_homepage'),
+            'fields': ('title', 'description', 'publish_on', 'published_on', 'on_homepage'),
         }),
         (None, {
             'fields': ('categories', 'tags', 'linked_article', 'linked_page'),
