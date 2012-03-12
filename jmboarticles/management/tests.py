@@ -3,7 +3,7 @@ from django.test.client import Client
 from django.core.urlresolvers import reverse
 from django.template.defaultfilters import slugify
 from django.contrib.sites.models import Site
-from jmboarticles.management.commands import content_scheduler
+from jmboarticles.management.commands import article_content_scheduler
 from jmboarticles.models import Article
 from datetime import datetime, timedelta
 
@@ -34,7 +34,7 @@ class ContentSchedulerTestCase(TestCase):
                                     publish_on=yesterday)
         article2 = self.mk_article(published_on=None, published=False,
                                     publish_on=tomorrow)
-        cs = content_scheduler.Command()
+        cs = article_content_scheduler.Command()
         cs.handle()
         [article1, article2] = Article.objects.filter(
                                 pk__in=[article1.pk, article2.pk])
