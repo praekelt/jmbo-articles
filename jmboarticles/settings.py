@@ -151,6 +151,7 @@ INSTALLED_APPS = (
     #'accounts',
     'featured',
     'video',
+    'management',
 
     #jmbo
     'category',
