@@ -5,6 +5,7 @@ from django.views.generic.simple import direct_to_template
 from django.db.models import Count
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.conf import settings
 
 from jmbocomments.models import UserComment
 from jmboarticles.models import Article
@@ -40,7 +41,11 @@ def article_detail(request, pk, page=None):
 
     comment_qs = UserComment.objects.filter(content_type=article_content_type,
         object_pk=article.pk).select_related('user').order_by('submit_date')
-    paginator = Paginator(comment_qs, per_page=5, orphans=4)
+    
+    comments_per_page = settings.COMMENTS_PER_PAGE \
+                        if settings.COMMENTS_PER_PAGE else 5
+    
+    paginator = Paginator(comment_qs, per_page=comments_per_page, orphans=4)
     if not page:
         page = paginator.num_pages
 
