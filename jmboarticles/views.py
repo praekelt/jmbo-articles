@@ -62,6 +62,39 @@ def article_detail(request, pk, page=None):
         })
     })
 
+def article_detail_redo(request, pk, page=1):
+
+    try:
+        article = Article.objects.select_related('poll').get(pk=pk)
+    except Article.DoesNotExist:
+        raise Http404
+
+    article.inc_view_count()
+    article_content_type = ContentType.objects.get_for_model(Article)
+
+    comment_qs = UserComment.objects.filter(content_type=article_content_type,
+        object_pk=article.pk).select_related('user').order_by('-submit_date')
+    
+    comments_per_page = settings.COMMENTS_PER_PAGE \
+                        if settings.COMMENTS_PER_PAGE else 5
+    paginator = Paginator(comment_qs, comments_per_page)
+    
+    try:
+        comment_list = paginator.page(page)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        comment_list = paginator.page(paginator.num_pages)
+        
+    comment_count = paginator.count
+
+    return direct_to_template(request, 'article/article_detail.html', {
+        'article': article,
+        'comment_list': comment_list,
+        'comment_count': comment_count,
+        'current_url': reverse('article_detail', kwargs={
+            'pk': article.pk,
+        })
+    })
 
 def article_like(request, pk):
 

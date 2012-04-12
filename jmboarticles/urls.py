@@ -6,6 +6,10 @@ from jmboarticles.models import Article
 urlpatterns = patterns('jmboarticles.views',
     url(r'^(?P<pk>\d+)/$', 'article_detail', name='article_detail'),
     url(r'^(?P<pk>\d+)/p/(?P<page>\d+)/$', 'article_detail', name='article_detail'),
+    
+    url(r'^(?P<pk>\d+)/$', 'article_detail_redo', name='article_detail_redo'),
+    url(r'^(?P<pk>\d+)/p/(?P<page>\d+)/$', 'article_detail_redo', name='article_detail_redo'),
+    
     url(r'^(?P<pk>\d+)/like/$', 'article_like', name='article_like'),
 
     url(r'^$', 'article_list', name='article_list'),
