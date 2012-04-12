@@ -91,7 +91,7 @@ def article_detail_redo(request, pk, page=1):
         'article': article,
         'comment_list': comment_list,
         'comment_count': comment_count,
-        'current_url': reverse('article_detail', kwargs={
+        'current_url': reverse('article_detail_redo', kwargs={
             'pk': article.pk,
         })
     })
