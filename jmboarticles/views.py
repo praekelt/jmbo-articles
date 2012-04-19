@@ -42,8 +42,9 @@ def article_detail(request, pk, page=None):
     comment_qs = UserComment.objects.filter(content_type=article_content_type,
         object_pk=article.pk).select_related('user').order_by('submit_date')
     
-    comments_per_page = settings.COMMENTS_PER_PAGE \
-                        if settings.COMMENTS_PER_PAGE else 5
+    comments_per_page = 5    
+    if hasattr(settings, 'COMMENTS_PER_PAGE'):
+        comments_per_page = settings.COMMENTS_PER_PAGE
     
     paginator = Paginator(comment_qs, per_page=comments_per_page, orphans=4)
     if not page:
@@ -75,8 +76,10 @@ def article_detail_redo(request, pk, page=1):
     comment_qs = UserComment.objects.filter(content_type=article_content_type,
         object_pk=article.pk).select_related('user').order_by('-submit_date')
     
-    comments_per_page = settings.COMMENTS_PER_PAGE \
-                        if settings.COMMENTS_PER_PAGE else 5
+    comments_per_page = 5    
+    if hasattr(settings, 'COMMENTS_PER_PAGE'):
+        comments_per_page = settings.COMMENTS_PER_PAGE
+        
     paginator = Paginator(comment_qs, comments_per_page)
     
     try:
