@@ -157,6 +157,7 @@ INSTALLED_APPS = (
     'category',
     'downloads',
     'sites_groups',
+    'publisher',
 
     # tests!
     'django_nose',
