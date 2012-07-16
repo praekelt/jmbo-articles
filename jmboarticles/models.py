@@ -36,7 +36,7 @@ class Article(models.Model, DirtyFieldsMixin):
     tags = models.ManyToManyField('category.Tag', blank=True, null=True)
 
     # Extra Content
-    poll = models.ForeignKey(Poll, blank=True, null=True)
+    polls = models.ManyToManyField(Poll, blank=True, null=True, related_name='articles')
     video = models.ForeignKey(Video, blank=True, null=True)
     linked_article = models.ForeignKey('jmboarticles.Article', blank=True, null=True)
     linked_page = models.ForeignKey('flatpages.FlatPage', blank=True, null=True)
