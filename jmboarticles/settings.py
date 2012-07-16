@@ -155,6 +155,8 @@ INSTALLED_APPS = (
 
     #jmbo
     'category',
+    'downloads',
+    'sites_groups',
 
     # tests!
     'django_nose',

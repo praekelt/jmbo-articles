@@ -7,3 +7,7 @@ django-category==0.0.3
 django-dirtyfields
 South==0.7.3
 -e git+https://github.com/dwaiter/django-ckeditor.git#egg=django_ckeditor-dev
+jmbo
+-e git+https://github.com/praekelt/jmbo-downloads.git@4638188#egg=jmbo-downloads
+django-sites-groups==0.1.2
+requests==0.8.3
