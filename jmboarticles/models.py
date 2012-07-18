@@ -75,7 +75,7 @@ class Article(models.Model, DirtyFieldsMixin):
 
     @permalink
     def get_absolute_url(self):
-        return ('article_detail', None, {
+        return ('article_detail_redo', None, {
             'pk': self.pk
         })
 
