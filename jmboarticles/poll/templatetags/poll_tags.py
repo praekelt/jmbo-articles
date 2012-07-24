@@ -22,11 +22,8 @@ def get_featured_poll(context, var_name='featured_poll'):
 
 @register.simple_tag(takes_context=True)
 def get_featured_polls(context, var_name='featured_polls'):
-    try:
-        context[var_name] = Poll.published_objects.filter(featured=True)\
-                                                    .order_by('-publish_on')
-    except Poll.DoesNotExist:
-        context[var_name] = None
+    context[var_name] = Poll.published_objects.filter(featured=True)\
+                                                .order_by('-publish_on')
     return ""
 
 
