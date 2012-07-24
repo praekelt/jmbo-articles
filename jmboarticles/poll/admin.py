@@ -1,5 +1,5 @@
 from django.contrib import admin
-
+from django.db.models import Sum
 
 from jmboarticles.poll.models import Poll, Choice
 
@@ -10,8 +10,9 @@ class ChoiceInline(admin.TabularInline):
 
 
 class PollAdmin(admin.ModelAdmin):
-    list_display = ('question', 'published', 'publish_on', 'featured',)
-    filter_by = ('published', 'publish_on', 'sites', 'featured',)
+    list_display = ('question', 'published', 'publish_on', 'featured',\
+                    'total_votes')
+    list_filter = ('published', 'publish_on', 'sites', 'featured',)
     list_editable = ('published', 'featured',)
 
     inlines = [ChoiceInline, ]
@@ -24,5 +25,9 @@ class PollAdmin(admin.ModelAdmin):
             'fields': ('sites',)
         }),
     )
+
+    def total_votes(self, instance):
+        return instance.choice_set\
+                        .aggregate(Sum('vote_count'))['vote_count__sum']
 
 admin.site.register(Poll, PollAdmin)
