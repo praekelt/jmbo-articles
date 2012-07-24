@@ -3,8 +3,7 @@ from django import template
 
 register = template.Library()
 
-from jmboarticles.poll.models import Poll, Choice
-
+from jmboarticles.poll.models import Poll
 
 
 @register.inclusion_tag('poll/tag_poll.html', takes_context=True)
@@ -20,11 +19,23 @@ def get_featured_poll(context, var_name='featured_poll'):
         context[var_name] = None
     return ""
 
+
+@register.simple_tag(takes_context=True)
+def get_featured_polls(context, var_name='featured_polls'):
+    try:
+        context[var_name] = Poll.published_objects.filter(featured=True)\
+                                                    .order_by('-publish_on')
+    except Poll.DoesNotExist:
+        context[var_name] = None
+    return ""
+
+
 @register.filter
 def is_published(poll):
     if poll.published and poll.publish_on <= datetime.now():
         return True
     return False
+
 
 @register.filter
 def has_user_voted(poll, user):
