@@ -4,13 +4,26 @@ from django.contrib.flatpages.admin import FlatPageAdmin
 from django.contrib.flatpages.models import FlatPage
 
 from jmboarticles.models import Article
+from jmboarticles.poll.models import Poll
 from jmbocomments.models import UserComment
 
 from ckeditor.widgets import AdminCKEditor
 
+from django import forms
+
+
+class ArticleAdminForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ArticleAdminForm, self).__init__(*args, **kwargs)
+        self.fields['linked_article'].queryset = Article.objects.order_by('title')
+        self.fields['polls'].queryset = Poll.objects.order_by('question')
+
+    class Meta:
+        model = Article
+
 
 class ArticleAdmin(admin.ModelAdmin):
-
+    form = ArticleAdminForm
 
     list_filter = ('published', 'on_homepage', 'publish_on', 'sites', 'tags', 'categories')
     list_display = ('title', 'published', 'publish_on', 'published_on', 'created',
@@ -23,7 +36,7 @@ class ArticleAdmin(admin.ModelAdmin):
         models.TextField: {'widget': AdminCKEditor},
     }
     ordering = ('-published', '-published_on', '-updated', 'created',)
-    prepopulated_fields =  {'slug': ('title',),}
+    prepopulated_fields = {'slug': ('title',), }
     save_on_top = True
     readonly_fields = ('author', 'created', 'updated', 'published_on')
     fieldsets = (
