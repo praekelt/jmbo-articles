@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.db import models
 from django.contrib.flatpages.admin import FlatPageAdmin
 from django.contrib.flatpages.models import FlatPage
+from django.contrib.contenttypes.models import ContentType
 
 from jmboarticles.models import Article
 from jmboarticles.poll.models import Poll
@@ -65,9 +66,15 @@ class ArticleAdmin(admin.ModelAdmin):
         return ', '.join([site.name for site in article.sites.all()])
 
     def _view_comments(self, article):
-        print dir(article)
+        if hasattr(article, 'livechat_set') and article.livechat_set.exists():
+            livechat = article.livechat_set.latest('created_at')
+            ct = ContentType.objects.get_for_model(livechat.__class__)
+            return '<a href="/admin/jmbocomments/usercomment/?object_pk=%s&content_type=%s">View (%s)</a>' % (
+                article.pk, ct.pk, livechat.comment_set().count())
+
         return '<a href="/admin/jmbocomments/usercomment/?object_pk=%s">View (%s)</a>' % (
             article.pk, UserComment.objects.filter(object_pk=article.pk).count())
+
     _view_comments.short_description = 'Comments'
     _view_comments.allow_tags = True
 
