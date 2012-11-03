@@ -70,7 +70,7 @@ class ArticleAdmin(admin.ModelAdmin):
             livechat = article.livechat_set.latest('created_at')
             ct = ContentType.objects.get_for_model(livechat.__class__)
             return '<a href="/admin/jmbocomments/usercomment/?object_pk=%s&content_type=%s">View (%s)</a>' % (
-                article.pk, ct.pk, livechat.comment_set().count())
+                livechat.pk, ct.pk, livechat.comment_set().count())
 
         return '<a href="/admin/jmbocomments/usercomment/?object_pk=%s">View (%s)</a>' % (
             article.pk, UserComment.objects.filter(object_pk=article.pk).count())
