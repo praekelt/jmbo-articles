@@ -158,6 +158,18 @@ INSTALLED_APPS = (
     'downloads',
     'sites_groups',
     'publisher',
+    'jmbo',
+
+    'photologue',
+    'secretballot',
+
+    # 3rd party
+    'ckeditor',
+    'atlas',
+    'django.contrib.gis',
+    'tastypie',
+    'simple_autocomplete',
+    'export',
 
     # tests!
     'django_nose',

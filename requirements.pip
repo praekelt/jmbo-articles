@@ -1,4 +1,4 @@
-Django==1.3.1
+Django==1.4.2
 nose
 django-nose
 PIL==1.1.7
@@ -11,3 +11,6 @@ jmbo
 -e git+https://github.com/praekelt/jmbo-downloads.git@4638188#egg=jmbo-downloads
 django-sites-groups==0.1.2
 requests==0.8.3
+django-simple-autocomplete
+django-object-tools
+django-export
