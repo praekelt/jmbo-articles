@@ -55,7 +55,7 @@ class ArticleAdmin(admin.ModelAdmin):
             'fields': ('image', 'video', 'content', ('source_link', 'source_name')),
         }),
         (None, {
-            'fields': ('sites', 'polls', 'downloads', 'comments_enabled',),
+            'fields': ('sites', 'polls', 'downloads', 'comments_enabled', 'can_comment', ),
         }),
         (None, {
             'fields': ('author', 'created', 'updated')
