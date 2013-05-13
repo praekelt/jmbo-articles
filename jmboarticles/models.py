@@ -54,6 +54,7 @@ class Article(models.Model, DirtyFieldsMixin):
 
     # Social
     comments_enabled = models.BooleanField(default=True)
+    temp_can_comment = models.BooleanField(default=True)
 
     # Sites
     sites = models.ManyToManyField(Site)
