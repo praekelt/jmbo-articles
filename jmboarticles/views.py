@@ -5,8 +5,9 @@ from django.views.generic.simple import direct_to_template
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.conf import settings
+from django.db.models import Q
 
-from jmbocomments.models import UserComment
+from jmbocomments.models import UserComment, UserCommentFlag
 from jmboarticles.models import Article
 
 
@@ -40,11 +41,11 @@ def article_detail(request, pk, page=None):
 
     comment_qs = UserComment.objects.filter(content_type=article_content_type,
         object_pk=article.pk).select_related('user').order_by('submit_date')
-    
-    comments_per_page = 5    
+
+    comments_per_page = 5
     if hasattr(settings, 'COMMENTS_PER_PAGE'):
         comments_per_page = settings.COMMENTS_PER_PAGE
-    
+
     paginator = Paginator(comment_qs, per_page=comments_per_page, orphans=4)
     if not page:
         page = paginator.num_pages
@@ -73,20 +74,24 @@ def article_detail_redo(request, pk, page=1):
     article_content_type = ContentType.objects.get_for_model(Article)
 
     comment_qs = UserComment.objects.filter(content_type=article_content_type,
-        object_pk=article.pk).select_related('user').order_by('-submit_date')
-    
-    comments_per_page = 5    
+                                            object_pk=article.pk)\
+                                    .exclude(Q(is_removed=True) |
+                                            Q(flag_set__flag=UserCommentFlag.COMMUNITY_REMOVAL))\
+                                    .select_related('user')\
+                                    .order_by('-submit_date')
+
+    comments_per_page = 5
     if hasattr(settings, 'COMMENTS_PER_PAGE'):
         comments_per_page = settings.COMMENTS_PER_PAGE
-        
+
     paginator = Paginator(comment_qs, comments_per_page)
-    
+
     try:
         comment_list = paginator.page(page)
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         comment_list = paginator.page(paginator.num_pages)
-        
+
     comment_count = paginator.count
 
     return direct_to_template(request, 'article/article_detail.html', {
