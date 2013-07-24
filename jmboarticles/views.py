@@ -78,7 +78,7 @@ def article_detail_redo(request, pk, page=1):
     comment_qs = UserComment.objects.filter(content_type=article_content_type,
                                             object_pk=article.pk)\
                                     .exclude(is_removed=True,
-                                             flag_set__flag=exclude_flags)\
+                                             flag_set__flag__in=exclude_flags)\
                                     .select_related('user')\
                                     .order_by('-submit_date')
 
