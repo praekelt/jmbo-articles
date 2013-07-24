@@ -32,6 +32,7 @@ class ArticleAdmin(admin.ModelAdmin):
     list_editable = ('published',)
     search_fields = ('title',)
     filter_horizontal = ('categories', 'tags', 'polls')
+    list_per_page = 10
 
     formfield_overrides = {
         models.TextField: {'widget': AdminCKEditor},
