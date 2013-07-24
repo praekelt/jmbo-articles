@@ -73,12 +73,11 @@ def article_detail_redo(request, pk, page=1):
     article.inc_view_count()
     article_content_type = ContentType.objects.get_for_model(Article)
 
-    exclude_flags = [UserCommentFlag.COMMUNITY_REMOVAL,
-                     UserCommentFlag.MODERATOR_DELETION]
     comment_qs = UserComment.objects.filter(content_type=article_content_type,
                                             object_pk=article.pk)\
-                                    .exclude(is_removed=True,
-                                             flag_set__flag__in=exclude_flags)\
+                                    .exclude(is_removed=True)\
+                                    .exclude(flag_set__flag=UserCommentFlag.COMMUNITY_REMOVAL)\
+                                    .exclude(flag_set__flag=UserCommentFlag.MODERATOR_DELETION)\
                                     .select_related('user')\
                                     .order_by('-submit_date')
 
