@@ -8,7 +8,7 @@ from jmboarticles.models import Article
 from jmboarticles.poll.models import Poll
 from jmbocomments.models import UserComment
 
-from ckeditor.widgets import AdminCKEditor
+from ckeditor.widgets import CKEditorWidget
 
 from django import forms
 
@@ -35,7 +35,7 @@ class ArticleAdmin(admin.ModelAdmin):
     list_per_page = 10
 
     formfield_overrides = {
-        models.TextField: {'widget': AdminCKEditor},
+        models.TextField: {'widget': CKEditorWidget},
     }
     ordering = ('-published', '-published_on', '-updated', 'created',)
     prepopulated_fields = {'slug': ('title',), }
@@ -87,7 +87,7 @@ class ArticleAdmin(admin.ModelAdmin):
 
 class RichTextFlatPageAdmin(FlatPageAdmin):
     formfield_overrides = {
-        models.TextField: {'widget': AdminCKEditor}
+        models.TextField: {'widget': CKEditorWidget}
     }
 
 admin.site.unregister(FlatPage)
